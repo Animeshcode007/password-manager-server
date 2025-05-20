@@ -7,10 +7,13 @@ const authRoutes = require("./routes/auth");
 const credentialRoutes = require("./routes/credentials");
 
 const app = express();
-app.use(cors({
-  origin: "https://password-manager-client-fnst.onrender.com",
-  credentials: true, // if you're using cookies
-}));
+app.use(
+  cors({
+    origin: process.env.VITE_API_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // only if you use cookies; omit if you don’t
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
